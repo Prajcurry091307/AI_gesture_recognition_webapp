@@ -1,3 +1,9 @@
+noseX = 0;
+noseY = 0;
+leftWristX = 0;
+rightWristX = 0;
+difference = 0;
+
 function setup()
 
 {
@@ -23,5 +29,22 @@ function gotPoses(results)
 
   {
       console.log(results)
+      noseX = results[0].pose.nose.x;
+      noseY = results[0].pose.nose.y;
+      console.log("noseX = "+noseX + "noseY = "+noseY);
+
+      leftWristX = results[0].pose.leftWrist.x;
+      rightWristX = results[0].pose.rightWrist.x;
+      difference = floor(leftWristX - rightWristX);
+      
   }
+}
+
+function draw()
+{
+    background('#968a8b');
+    document.getElementById('square_side').innerHTML = difference + "px"
+    fill('#f22c32');
+    stroke('#003df2')
+    square(noseX,noseY,difference);
 }
